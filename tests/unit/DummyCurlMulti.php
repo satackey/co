@@ -7,16 +7,16 @@ class DummyCurlMulti
 
     public function addHandle($ch) : int
     {
-        if (isset($this->pool[(string)$ch])) {
+        if (isset($this->pool[TypeUtils::getIdOfCurlHandleOrGenerator($ch)])) {
             return 7;
         }
-        $this->pool[(string)$ch] = $ch;
+        $this->pool[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $ch;
         return 0;
     }
 
     public function removeHandle($ch) : int
     {
-        unset($this->pool[(string)$ch]);
+        unset($this->pool[TypeUtils::getIdOfCurlHandleOrGenerator($ch)]);
         return 0;
     }
 

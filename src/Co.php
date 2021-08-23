@@ -257,12 +257,12 @@ class Co implements CoInterface
         foreach ($yieldables as $yieldable) {
             // Add or enqueue cURL handles
             if (TypeUtils::isCurl($yieldable['value'])) {
-                $promises[(string)$yieldable['value']] = $this->pool->addCurl($yieldable['value']);
+                $promises[TypeUtils::getIdOfCurlHandleOrGenerator($yieldable['value'])] = $this->pool->addCurl($yieldable['value']);
                 continue;
             }
             // Process generators
             if (TypeUtils::isGeneratorContainer($yieldable['value'])) {
-                $promises[(string)$yieldable['value']] = $this->processGeneratorContainer($yieldable['value']);
+                $promises[TypeUtils::getIdOfCurlHandleOrGenerator($yieldable['value'])] = $this->processGeneratorContainer($yieldable['value']);
                 continue;
             }
         }

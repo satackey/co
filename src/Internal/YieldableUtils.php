@@ -47,10 +47,10 @@ class YieldableUtils
         $r = [];
         if (!is_array($value)) {
             if (TypeUtils::isCurl($value) || TypeUtils::isGeneratorContainer($value)) {
-                if (isset($runners[(string)$value])) {
+                if (isset($runners[TypeUtils::getIdOfCurlHandleOrGenerator($value)])) {
                     throw new \DomainException('Duplicated cURL resource or Generator instance found.');
                 }
-                $r[(string)$value] = $runners[(string)$value] = [
+                $r[TypeUtils::getIdOfCurlHandleOrGenerator($value)] = $runners[TypeUtils::getIdOfCurlHandleOrGenerator($value)] = [
                     'value' => $value,
                     'keylist' => $keylist,
                 ];

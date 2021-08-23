@@ -64,7 +64,7 @@ abstract class AbstractScheduler
         $entries = $this->readCompletedEntries();
         foreach ($entries as $entry) {
             curl_multi_remove_handle($this->mh, $entry['handle']);
-            unset($this->added[(string)$entry['handle']]);
+            unset($this->added[TypeUtils::getIdOfCurlHandleOrGenerator($entry['handle'])]);
             $this->interruptConsume();
         }
         $this->resolveEntries($entries);
@@ -91,8 +91,8 @@ abstract class AbstractScheduler
     protected function resolveEntries(array $entries)
     {
         foreach ($entries as $entry) {
-            $deferred = $this->deferreds[(string)$entry['handle']];
-            unset($this->deferreds[(string)$entry['handle']]);
+            $deferred = $this->deferreds[TypeUtils::getIdOfCurlHandleOrGenerator($entry['handle'])];
+            unset($this->deferreds[TypeUtils::getIdOfCurlHandleOrGenerator($entry['handle'])]);
             $entry['result'] === CURLE_OK
                 ? $deferred->resolve(curl_multi_getcontent($entry['handle']))
                 : $deferred->reject(new CURLException(curl_error($entry['handle']), $entry['result'], $entry['handle']));

@@ -64,8 +64,8 @@ class ManualScheduler extends AbstractScheduler
             return;
             // @codeCoverageIgnoreEnd
         }
-        $this->added[(string)$ch] = $ch;
-        $deferred && $this->deferreds[(string)$ch] = $deferred;
+        $this->added[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $ch;
+        $deferred && $this->deferreds[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $deferred;
     }
 
     /**
@@ -75,8 +75,8 @@ class ManualScheduler extends AbstractScheduler
      */
     private function addReserved($ch, Deferred $deferred = null)
     {
-        $this->queue[(string)$ch] = $ch;
-        $deferred && $this->deferreds[(string)$ch] = $deferred;
+        $this->queue[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $ch;
+        $deferred && $this->deferreds[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $deferred;
     }
 
     /**

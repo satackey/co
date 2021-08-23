@@ -36,8 +36,8 @@ class AutoScheduler extends AbstractScheduler
             return $deferred->promise();
             // @codeCoverageIgnoreEnd
         }
-        $this->added[(string)$ch] = $ch;
-        $this->deferreds[(string)$ch] = $deferred;
+        $this->added[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $ch;
+        $this->deferreds[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $deferred;
         return $deferred->promise();
     }
 

@@ -170,11 +170,11 @@ class UtilsTest extends \Codeception\TestCase\Test
             ],
         ];
         $this->assertEquals([
-            (string)$z1 => [
+            TypeUtils::getIdOfCurlHandleOrGenerator($z1) => [
                 'value' => $z1,
                 'keylist' => ['x', 'y2', 'z1'],
             ],
-            (string)$z2 => [
+            TypeUtils::getIdOfCurlHandleOrGenerator($z2) => [
                 'value' => $z2,
                 'keylist' => ['x', 'y2', 'z2'],
             ],
