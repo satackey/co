@@ -59,7 +59,7 @@ class ManualScheduler extends AbstractScheduler
         $errno = curl_multi_add_handle($this->mh, $ch);
         if ($errno !== CURLM_OK) {
             // @codeCoverageIgnoreStart
-            $msg = curl_multi_strerror($errno) . ": $ch";
+            $msg = curl_multi_strerror($errno) . ': ' . TypeUtils::getIdOfCurlHandleOrGenerator($ch);
             $deferred && $deferred->reject(new \RuntimeException($msg));
             return;
             // @codeCoverageIgnoreEnd
