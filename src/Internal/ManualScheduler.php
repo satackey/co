@@ -59,13 +59,13 @@ class ManualScheduler extends AbstractScheduler
         $errno = curl_multi_add_handle($this->mh, $ch);
         if ($errno !== CURLM_OK) {
             // @codeCoverageIgnoreStart
-            $msg = curl_multi_strerror($errno) . ": $ch";
+            $msg = curl_multi_strerror($errno) . ': ' . TypeUtils::getIdOfCurlHandleOrGenerator($ch);
             $deferred && $deferred->reject(new \RuntimeException($msg));
             return;
             // @codeCoverageIgnoreEnd
         }
-        $this->added[(string)$ch] = $ch;
-        $deferred && $this->deferreds[(string)$ch] = $deferred;
+        $this->added[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $ch;
+        $deferred && $this->deferreds[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $deferred;
     }
 
     /**
@@ -75,8 +75,8 @@ class ManualScheduler extends AbstractScheduler
      */
     private function addReserved($ch, Deferred $deferred = null)
     {
-        $this->queue[(string)$ch] = $ch;
-        $deferred && $this->deferreds[(string)$ch] = $deferred;
+        $this->queue[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $ch;
+        $deferred && $this->deferreds[TypeUtils::getIdOfCurlHandleOrGenerator($ch)] = $deferred;
     }
 
     /**

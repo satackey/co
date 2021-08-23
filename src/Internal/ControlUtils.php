@@ -37,7 +37,7 @@ class ControlUtils
     {
         $gens = [];
         foreach ($yieldables as $yieldable) {
-            $gens[(string)$yieldable['value']] = $filter($yieldable['value']);
+            $gens[TypeUtils::getIdOfCurlHandleOrGenerator($yieldable['value'])] = $filter($yieldable['value']);
         }
         yield CoInterface::RETURN_WITH => (yield $gens);
         // @codeCoverageIgnoreStart

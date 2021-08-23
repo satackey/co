@@ -5,13 +5,30 @@ namespace mpyw\Co\Internal;
 class TypeUtils
 {
     /**
+     * Get identifier of cURL handle or Generator
+     * @param  resource|object $value
+     * @return string
+     */
+    public static function getIdOfCurlHandleOrGenerator($value): string
+    {
+        if (is_resource($value)) {
+            return (string) $value;
+        }
+        return spl_object_hash($value);
+    }
+
+    /**
      * Check if value is a valid cURL handle.
      * @param  mixed $value
      * @return bool
      */
     public static function isCurl($value)
     {
-        return is_resource($value) && get_resource_type($value) === 'curl';
+        if (version_compare(phpversion(), '8.0.0', '<')) {
+            return is_resource($value) && get_resource_type($value) === 'curl';
+        }
+
+        return $value instanceof \CurlHandle;
     }
 
     /**
