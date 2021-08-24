@@ -14,7 +14,7 @@ class Pool
 
     /**
      * cURL multi handle.
-     * @var resource
+     * @var resource|\CurlMultiHandle
      */
     private $mh;
 
@@ -55,7 +55,7 @@ class Pool
 
     /**
      * Call curl_multi_add_handle() or push into queue.
-     * @param resource $ch
+     * @param resource|\CurlHandle $ch
      * @return PromiseInterface
      */
     public function addCurl($ch)

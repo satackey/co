@@ -16,8 +16,8 @@ class ManualScheduler extends AbstractScheduler
     /**
      * Constructor.
      * Initialize cURL multi handle.
-     * @param CoOption $options
-     * @param resource $mh      curl_multi
+     * @param CoOption                  $options
+     * @param resource|\CurlMultiHandle $mh      curl_multi
      */
     public function __construct(CoOption $options, $mh)
     {
@@ -27,7 +27,7 @@ class ManualScheduler extends AbstractScheduler
 
     /**
      * Call curl_multi_add_handle() or push into queue.
-     * @param resource $ch
+     * @param resource|\CurlHandle $ch
      * @return PromiseInterface
      */
     public function add($ch)
@@ -51,8 +51,8 @@ class ManualScheduler extends AbstractScheduler
 
     /**
      * Call curl_multi_add_handle().
-     * @param resource $ch
-     * @param Deferred $deferred
+     * @param resource|\CurlHandle $ch
+     * @param Deferred             $deferred
      */
     private function addImmediate($ch, Deferred $deferred = null)
     {
@@ -70,7 +70,7 @@ class ManualScheduler extends AbstractScheduler
 
     /**
      * Push into queue.
-     * @param resource $ch
+     * @param resource|\CurlHandle $ch
      * @param Deferred $deferred
      */
     private function addReserved($ch, Deferred $deferred = null)

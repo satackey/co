@@ -9,7 +9,7 @@ class TypeUtils
      * @param  resource|object $value
      * @return string
      */
-    public static function getIdOfCurlHandleOrGenerator($value): string
+    public static function getIdOfCurlHandleOrGenerator($value)
     {
         if (is_resource($value)) {
             return (string) $value;

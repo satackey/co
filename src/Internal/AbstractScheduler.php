@@ -8,7 +8,7 @@ abstract class AbstractScheduler
 {
     /**
      * cURL multi handle.
-     * @var resource
+     * @var resource|\CurlMultiHandle
      */
     protected $mh;
 
@@ -33,14 +33,14 @@ abstract class AbstractScheduler
     /**
      * Constructor.
      * Initialize cURL multi handle.
-     * @param CoOption $options
-     * @param resource $mh      curl_multi
+     * @param CoOption                  $options
+     * @param resource|\CurlMultiHandle $mh      curl_multi
      */
     abstract public function __construct(CoOption $options, $mh);
 
     /**
      * Call curl_multi_add_handle() or push into queue.
-     * @param resource $ch
+     * @param resource|\CurlHandle $ch
      * @return PromiseInterface
      */
     abstract public function add($ch);
